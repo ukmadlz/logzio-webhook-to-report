@@ -1,0 +1,38 @@
+{
+  "name": "logzio-webhook-to-report",
+  "version": "0.0.1",
+  "description": "Receives alerts from Logz.IO and returns a report",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "node dist/index.js",
+    "start:dev": "nodemon -w ./src -x \"tsc && npm run start\" --ext ts,tsx",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ukmadlz/logzio-webhook-to-report.git"
+  },
+  "keywords": [
+    "Logz.IO",
+    "Alerts"
+  ],
+  "author": "Mike Elsmore <mike.elsmore@logz.io>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ukmadlz/logzio-webhook-to-report/issues"
+  },
+  "homepage": "https://github.com/ukmadlz/logzio-webhook-to-report#readme",
+  "devDependencies": {
+    "@types/dotenv": "^8.2.0",
+    "@types/node": "^13.13.4",
+    "nodemon": "^2.0.3",
+    "typescript": "^3.8.3"
+  },
+  "dependencies": {
+    "@hapi/hapi": "^19.1.1",
+    "dotenv": "^8.2.0",
+    "logzio-typescript": "github:ukmadlz/logzio-typescript",
+    "nedb": "^1.8.0",
+    "uuid": "^7.0.3"
+  }
+}
