@@ -12,10 +12,19 @@ jobs:
           LOGZIO_MODULES: docker
     steps:
       - run:
+          name: Install Git
+          command: |
+            apt update
+            apt install -y git
+      - run:
           name: Install node
           command: |
-            curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
-            sudo apt-get install -y nodejs
+            curl -sL https://deb.nodesource.com/setup_12.x | bash -
+            apt-get install -y nodejs
+            npm i -g npm
+            node --version
+            npm --version
+      - checkout
       - run:
           name: NPM install
           command: npm install
