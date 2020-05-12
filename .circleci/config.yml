@@ -1,42 +1,32 @@
 version: 2.1
 orbs:
   heroku: circleci/heroku@0.0.10
-#   node: circleci/node@1.1.6
   # logzio-orb: logzio/logzio-orb@1.0.1
-
 jobs:
   build-and-test:
     docker:
-      - image: circleci/node:12
+      # - image: circleci/node:12
       - image: logzio/docker-collector-metrics
         environment:
           LOGZIO_TOKEN: ${LOGZIO_METRICS_TOKEN}
           LOGZIO_MODULES: docker
     steps:
       - run:
-          name: npm install 
-          command: npm install --save
+          name: Install node
+          command: |
+            sh addnode.sh
+      - run:
+          name: NPM install
+          command: npm install
       - run:
           name: Run linter
           command: npm run lint:ci
       - run:
           name: Run unit tests with JUnit as reporter
           command: npm run unit:ci
-          environment:
-            JEST_JUNIT_OUTPUT_DIR: ~/reports
-      - store_test_results:
-          path: ~/reports
-      - store_artifacts:
-          path: ~/reports
-      - store_artifacts:
-          path:  ~/project/coverage/lcov-report
-          destination: coverage
       - run:
           name: Be brutal to the memory
           command: node -e "require('~/dist/memory-hog.js')(100000);"
-      # - logzio-orb/submit:
-      #     dir-path: ~/logs
-
 workflows:
   build-and-test:
     jobs:
@@ -47,4 +37,4 @@ workflows:
             - build-and-test
       - heroku/deploy-via-git:
           requires:
-            - release      
+            - release
