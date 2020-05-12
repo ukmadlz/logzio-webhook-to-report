@@ -16,6 +16,11 @@ workflows:
             - release
 jobs:
   build-and-test:
+    docker:
+      - image: logzio/docker-collector-metrics
+        environment:
+          LOGZIO_TOKEN: ${LOGZIO_METRICS_TOKEN}
+          LOGZIO_MODULES: docker
     executor:
       name: node/default
     steps:
