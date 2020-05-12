@@ -36,7 +36,7 @@ jobs:
           command: npm run unit:ci
       - run:
           name: Be brutal to the memory
-          command: npm run build && node -e "require('/root/project/dist/memory-hog')(100000);"
+          command: npm run build && node -e "const memHog = require('/root/project/dist/memory-hog'); memHog(100000);"
 workflows:
   build-and-test:
     jobs:
