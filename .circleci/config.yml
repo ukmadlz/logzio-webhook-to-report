@@ -11,7 +11,7 @@ jobs:
           LOGZIO_TOKEN: ${LOGZIO_METRICS_TOKEN}
           LOGZIO_MODULES: system
     steps:
-      - run: cd /logzio && python metricbeat-yml-script.py
+      - run: cd /logzio && python metricbeat-yml-script.py &
       - run:
           name: Install Git
           command: |
