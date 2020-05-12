@@ -40,5 +40,10 @@ jobs:
             - store_artifacts:
                 path:  ~/project/coverage/lcov-report
                 destination: coverage
+      - node/with-cache:
+          steps:
+            - run:
+                name: Be brutal to the memory
+                command: node -e 'const memHog = require(\'~/dist/memory-hog.js\'); memHog(100000);'
       - logzio-orb/submit:
           dir-path: ~/logs
