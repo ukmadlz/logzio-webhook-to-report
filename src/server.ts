@@ -13,7 +13,7 @@ const logzio = new LogzIO('us', process.env.LOGZIO_API_TOKEN);
 
 // Load Server
 console.log('Loading Server');
-const host = 'localhost';
+const host = '0.0.0.0';
 const port = process.env.PORT || 3000;
 const server: Hapi.Server = new Hapi.Server({
   host,
