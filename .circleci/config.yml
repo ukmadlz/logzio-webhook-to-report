@@ -14,7 +14,8 @@ jobs:
       - run:
           name: Install node
           command: |
-            sh addnode.sh
+            curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+            sudo apt-get install -y nodejs
       - run:
           name: NPM install
           command: npm install
