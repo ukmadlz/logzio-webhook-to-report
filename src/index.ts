@@ -12,8 +12,8 @@ const logzio = new LogzIO('us', process.env.LOGZIO_API_TOKEN);
 
 
 // Load Server
-console.log(`Loading Server`);
-const host = "localhost";
+console.log('Loading Server');
+const host = 'localhost';
 const port = process.env.PORT || 3000;
 const server: Hapi.Server = new Hapi.Server({
   host,
@@ -21,7 +21,7 @@ const server: Hapi.Server = new Hapi.Server({
 });
 
 // Routes
-console.log(`Loading Server Routes`);
+console.log('Loading Server Routes');
 // Create test report
 server.route({
   method: 'POST',
@@ -31,7 +31,7 @@ server.route({
     const testID = uuid();
 
     // Create the custom endpoint
-    const alertDetails = await logzio.endpoints.custom.create(testID, `${process.env.BASE_URI}/alert/${testID}`, 'POST')
+    const alertDetails = await logzio.endpoints.custom.create(testID, `${process.env.BASE_URI}/alert/${testID}`, 'POST');
     console.log(alertDetails);
     return {
       testID
@@ -57,7 +57,7 @@ server.route({
     } catch(error) {
       console.error('Error Deleting Endpoint');
       console.error(error);
-      return {}
+      return {};
     }
   }
 });
@@ -67,10 +67,10 @@ server.route({
   method: 'POST',
   path: '/alert/{testID}',
   handler: (request, h) => {
-      const testId = request.params.testID;
-      console.log(request.payload)
-      // const { alert_title } = request.payload;
-      return {};
+    const testId = request.params.testID;
+    console.log(request.payload);
+    // const { alert_title } = request.payload;
+    return {};
   }
 });
 
@@ -79,9 +79,9 @@ server.route({
   method: 'GET',
   path: '/alert/{testID}',
   handler: (request, h) => {
-      const testId = request.params.testID;
-      console.log(testId)
-      return request.params;
+    const testId = request.params.testID;
+    console.log(testId);
+    return request.params;
   }
 });
 
@@ -99,32 +99,32 @@ server.route({
       return db.insert(recordsToInsert, (error, newDocs) => {
         if(error) return reject(error);
         return resolve(newDocs);
-      })
+      });
     });
     return await success;
   }
-})
+});
 
 const start = async () => {
   try {
     console.log( `Server running @ ${ server.info.uri }` );
     await server.start();
   } catch (err) {
-      console.error(err);
-      process.exit(1);
+    console.error(err);
+    process.exit(1);
   }
-}
+};
 
 // Catch the explosions
 // Catch unhandling unexpected exceptions
-process.on("uncaughtException", (error: Error) => {
+process.on('uncaughtException', (error: Error) => {
   console.error(`uncaughtException ${error.message}`);
 });
 
 
 // Catch unhandling rejected promises
-process.on("unhandledRejection", (reason: any) => {
-  console.error(`unhandledRejection`);
+process.on('unhandledRejection', (reason: any) => {
+  console.error('unhandledRejection');
   console.error(reason);
 });
 
