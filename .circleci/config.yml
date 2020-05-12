@@ -6,9 +6,13 @@ workflows:
   build-and-test:
     jobs:
       - build-and-test
-  heroku_deploy:
-    jobs:
-      - heroku/deploy-via-git
+      - release:
+          type: approval
+          requires:
+            - build-and-test
+      - heroku/deploy-via-git:
+          requires:
+            - release
 jobs:
   build-and-test:
     executor:
