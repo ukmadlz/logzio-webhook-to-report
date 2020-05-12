@@ -13,7 +13,8 @@
     "lint:fix": "npm run lint --fix",
     "unit": "jest --coverage",
     "unit:ci": "npm run unit --ci --reporters=default --reporters=jest-junit",
-    "test": "npm run lint && npm run unit"
+    "test": "npm run lint && npm run unit",
+    "prepare": "tsc"
   },
   "repository": {
     "type": "git",
